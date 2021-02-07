@@ -28,6 +28,11 @@ public class LoginController {
         return "redirect:" + loginPage;
     }
 
+    /**
+     * 如果跳转到其他地址使用 redirect
+     * 例如，return "redirect:http://www.baidu.com";
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/index")
     public Response index() {
