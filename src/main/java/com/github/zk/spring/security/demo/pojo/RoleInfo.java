@@ -1,5 +1,6 @@
 package com.github.zk.spring.security.demo.pojo;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -8,7 +9,9 @@ import java.util.List;
  * @author zk
  * @date 2021/1/21 10:32
  */
-public class RoleInfo {
+public class RoleInfo implements Serializable {
+    private static final long serialVersionUID = -6703773100368931284L;
+
     private Long id;
     private String roleName;
     private List<PermissionInfo> permissionInfos;

@@ -13,9 +13,11 @@ import java.util.List;
  * @date 2021/1/15 14:32
  */
 public class UserInfo implements UserDetails {
+    private static final long serialVersionUID = -6177045879532008391L;
+
     private Long id;
     private String username;
-    private String password;
+    private transient String password;
     private List<RoleInfo> roles;
 
     public Long getId() {

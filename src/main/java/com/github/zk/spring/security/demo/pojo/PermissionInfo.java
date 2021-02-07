@@ -1,12 +1,16 @@
 package com.github.zk.spring.security.demo.pojo;
 
+import java.io.Serializable;
+
 /**
  * 权限信息
  *
  * @author zk
  * @date 2021/1/21 10:41
  */
-public class PermissionInfo {
+public class PermissionInfo implements Serializable {
+    private static final long serialVersionUID = 874671003093440548L;
+
     private Long id;
     private String url;
 
