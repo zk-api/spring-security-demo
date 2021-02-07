@@ -44,7 +44,7 @@ public class CustomAccessDecisionManagerHandler implements AccessDecisionManager
         System.out.printf("用户名【%s】,角色【%s】\n", userInfo.getUsername(), userInfo.getRoles());
         //角色的url权限过滤
         for (PermissionInfo permissionInfo : userInfo.getRoles().get(0).getPermissionInfos()) {
-            boolean match = ANT_PATH_MATCHER.match(requestUrl, permissionInfo.getUrl());
+            boolean match = ANT_PATH_MATCHER.match(permissionInfo.getUrl(), requestUrl);
             if (match) {
                 return;
             }
