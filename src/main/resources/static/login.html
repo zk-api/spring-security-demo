@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Spring Security</h1>
-<form method="post" action="/login" on="false">
+<form method="post" action="http://localhost:8081/login">
     <div>
         用户名：<input type="text" name="username" id="username">
     </div>
@@ -30,8 +30,8 @@
             async: false,
             type: "POST",
             dataType: "json",
-            url: '/login',
-            contentType: "application/x-www-form-urlencoded",
+            url: 'http://localhost:8081/login',
+            contentType: "application/json",
             data: {
                 "username": username,
                 "password": password
@@ -43,7 +43,7 @@
                     alert("登陆成功");
                     window.location.href = "../home.html";
                 } else {
-                    alert(result.message)
+                    alert(result.msg)
                 }
             }
         });
