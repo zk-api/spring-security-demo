@@ -25,10 +25,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         //免登录公开请求
                         "/main/publicRequest",
-                        //登录请求
-                        "/main/login",
+                        //登录地址，用于直接访问登录接口，跳转登录界面
+                        "/login",
                         //Session 失效请求
-                        "/main/invalid").permitAll()
+                        "/invalid").permitAll()
                 //其他任意请求都需要登录验证
                 .anyRequest().authenticated()
                 //后置处理器
@@ -42,14 +42,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 }));
         // POST请求 /login
         http.formLogin()
+                //登录服务地址
                 .loginPage("/login")
-                .successForwardUrl("/main/index")
-                .failureForwardUrl("/main/error")
+                .successForwardUrl("/index")
                 .failureHandler(new CustomAuthenticationFailureHandler());
         http.httpBasic();
         http.sessionManagement()
                 //session 失效处理
-                .invalidSessionUrl("/main/invalid")
+                .invalidSessionUrl("/invalid")
                 //单点登录
                 .maximumSessions(1);
     }
