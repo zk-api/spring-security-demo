@@ -12,6 +12,8 @@ public class PermissionInfo implements Serializable {
     private static final long serialVersionUID = 874671003093440548L;
 
     private Long id;
+    private Long pid;
+    private String urlName;
     private String url;
 
     public Long getId() {
@@ -30,11 +32,19 @@ public class PermissionInfo implements Serializable {
         this.url = url;
     }
 
-    @Override
-    public String toString() {
-        return "PermissionInfo{" +
-                "id=" + id +
-                ", url='" + url + '\'' +
-                '}';
+    public Long getPid() {
+        return pid;
+    }
+
+    public void setPid(Long pid) {
+        this.pid = pid;
+    }
+
+    public String getUrlName() {
+        return urlName;
+    }
+
+    public void setUrlName(String urlName) {
+        this.urlName = urlName;
     }
 }
