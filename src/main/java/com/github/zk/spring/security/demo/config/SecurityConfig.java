@@ -2,12 +2,15 @@ package com.github.zk.spring.security.demo.config;
 
 import com.github.zk.spring.security.demo.handler.CustomAccessDecisionManagerHandler;
 import com.github.zk.spring.security.demo.handler.CustomAuthenticationFailureHandler;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 
 /**
  * Security 配置
@@ -20,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //取消跨站防护
-        http.csrf().disable().cors().disable();
+        http.csrf().disable().cors();
         http.authorizeRequests((requests) -> requests
                 .antMatchers(
                         //免登录公开请求
@@ -57,5 +60,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/favicon.ico", "/error");
+    }
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource(){
+        return httpServletRequest -> {
+            CorsConfiguration cfg = new CorsConfiguration();
+            cfg.addAllowedHeader("*");
+            cfg.addAllowedMethod("*");
+            cfg.addAllowedOrigin("*");
+            return cfg;
+        };
     }
 }
