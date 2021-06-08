@@ -38,7 +38,7 @@ public class MockDao {
         //创建权限信息
         PermissionInfo permissionInfo = new PermissionInfo();
         permissionInfo.setId(1L);
-        permissionInfo.setUrl("/main/queryUser");
+        permissionInfo.setUrl("/**");
 
         PermissionInfo permissionInfo2 = new PermissionInfo();
         permissionInfo2.setId(2L);
