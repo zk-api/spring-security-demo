@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 /**
  *
  *
@@ -72,4 +75,11 @@ public class MainController {
     public ModelAndView invalid() {
         return new ModelAndView("/login.html");
     }
+
+    @RequestMapping("/querySession")
+    public void querySession(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        System.out.println(session.getAttribute("SPRING_SECURITY_CONTEXT"));
+    }
+
 }
