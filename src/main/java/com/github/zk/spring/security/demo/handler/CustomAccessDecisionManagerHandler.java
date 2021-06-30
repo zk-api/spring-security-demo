@@ -1,6 +1,7 @@
 package com.github.zk.spring.security.demo.handler;
 
 import com.github.zk.spring.security.demo.pojo.PermissionInfo;
+import com.github.zk.spring.security.demo.pojo.RoleInfo;
 import com.github.zk.spring.security.demo.pojo.UserInfo;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDeniedException;
@@ -43,10 +44,12 @@ public class CustomAccessDecisionManagerHandler implements AccessDecisionManager
         UserInfo userInfo = (UserInfo) authentication.getPrincipal();
         System.out.printf("用户名【%s】,角色【%s】\n", userInfo.getUsername(), userInfo.getRoles());
         //角色的url权限过滤
-        for (PermissionInfo permissionInfo : userInfo.getRoles().get(0).getPermissionInfos()) {
-            boolean match = ANT_PATH_MATCHER.match(permissionInfo.getUrl(), requestUrl);
-            if (match) {
-                return;
+        for (RoleInfo role : userInfo.getRoles()) {
+            for (PermissionInfo permissionInfo : role.getPermissionInfos()) {
+                boolean match = ANT_PATH_MATCHER.match(permissionInfo.getUrl(), requestUrl);
+                if (match) {
+                    return;
+                }
             }
         }
         throw new AccessDeniedException("权限不足");
