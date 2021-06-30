@@ -2,9 +2,13 @@ package com.github.zk.spring.security.demo.controller;
 
 import com.github.zk.spring.security.demo.common.Response;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 登录 请求处理
@@ -38,6 +42,15 @@ public class LoginController {
     public Response index() {
         Response response = Response.getInstance();
         response.setOk(0, null, "登录成功", null);
+        return response;
+    }
+
+    @ResponseBody
+    @RequestMapping("/faild")
+    public Response faild(HttpServletRequest request) {
+        Response response = Response.getInstance();
+        AuthenticationException exception = (AuthenticationException) request.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+        response.setError(10000, null, exception.getMessage());
         return response;
     }
 
