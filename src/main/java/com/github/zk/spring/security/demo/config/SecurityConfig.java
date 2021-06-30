@@ -1,7 +1,6 @@
 package com.github.zk.spring.security.demo.config;
 
 import com.github.zk.spring.security.demo.handler.CustomAccessDecisionManagerHandler;
-import com.github.zk.spring.security.demo.handler.CustomAuthenticationFailureHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -46,9 +45,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // POST请求 /login
         http.formLogin()
                 //登录服务地址
-                .loginPage("/login")
+                .loginProcessingUrl("/login")
                 .successForwardUrl("/index")
-                .failureHandler(new CustomAuthenticationFailureHandler());
+                .failureForwardUrl("/faild").permitAll();
+//                .successHandler((req, res, authentication) -> {
+//                    Object principal = authentication.getPrincipal();
+//                    res.setContentType("application/json;charset=utf-8");
+//                    PrintWriter out = res.getWriter();
+//                    out.write(new ObjectMapper().writeValueAsString(principal));
+//                    out.flush();
+//                    out.close();
+//                })
+//                .failureHandler(new CustomAuthenticationFailureHandler());
         http.httpBasic();
         http.sessionManagement()
                 //session 失效处理
@@ -69,6 +77,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             cfg.addAllowedHeader("*");
             cfg.addAllowedMethod("*");
             cfg.addAllowedOrigin("*");
+//            cfg.setAllowCredentials(true);
+//            cfg.checkOrigin("http://localhost:8080");
             return cfg;
         };
     }
