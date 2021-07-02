@@ -1,5 +1,8 @@
 package com.github.zk.spring.security.demo.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -12,9 +15,11 @@ import java.util.List;
  * @author zk
  * @date 2021/1/15 14:32
  */
+@TableName(value = "t_user")
 public class UserInfo implements UserDetails {
     private static final long serialVersionUID = -6177045879532008391L;
 
+    @TableId(type = IdType.ASSIGN_ID)
     private Long id;
     private String username;
     private transient String password;

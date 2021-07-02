@@ -1,5 +1,7 @@
 package com.github.zk.spring.security.demo.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +10,7 @@ import java.io.Serializable;
  * @author zk
  * @date 2021/1/21 10:41
  */
+@TableName("t_permission")
 public class PermissionInfo implements Serializable {
     private static final long serialVersionUID = 874671003093440548L;
 
