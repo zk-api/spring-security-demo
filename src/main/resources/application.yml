@@ -3,8 +3,19 @@ server:
 
 spring:
   profiles:
-    active: remote
+    active: remote, datasource
   redis:
-    host: 127.0.0.1
+    host: 192.168.110.130
     port: 6379
     password: 123456
+
+login:
+  user:
+    username: superadmin
+    # 123456
+    password: "{bcrypt}$2a$10$0EQexC0XYw58x.ys.Ym8QO3H2Llr0G4wEAFddm8PkOUGy6hQraaui"
+    roles:
+      - roleName: 超级管理员
+        permissionInfos:
+          - urlName: 所有权限
+            url: /**

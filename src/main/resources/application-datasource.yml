@@ -36,3 +36,5 @@ spring:
         # 打开PSCache，并且指定每个连接上PSCache的大小  如果用Oracle，则把poolPreparedStatements配置为true，mysql可以配置为false。
         pool-prepared-statements: false
         max-open-prepared-statements: 20
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
